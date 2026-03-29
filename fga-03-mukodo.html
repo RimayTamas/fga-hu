@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title></title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --red:#C8001E; --red-dark:#9E0018; --nav:#1C1C1C; --text:#1A1A1A; --muted:#555; --light:#F7F5F2; --border:#DEDADA; }
+body { font-family:-apple-system,'Segoe UI',Arial,sans-serif; color:var(--text); background:#fff; font-size:15px; line-height:1.6; }
+.top-bar { background:var(--red); padding:14px 48px; display:flex; justify-content:space-between; align-items:center; }
+.logo { border:2.5px solid #fff; padding:5px 12px 4px; color:#fff; font-size:21px; font-weight:700; line-height:1.1; display:inline-block; }
+.logo sub { font-size:9px; letter-spacing:2px; font-weight:400; display:block; }
+.phone-block { text-align:right; color:#fff; }
+.phone-block .tagline { font-size:12px; opacity:.85; margin-bottom:2px; }
+.phone-block .phone { font-size:26px; font-weight:700; }
+.main-nav { background:var(--nav); display:flex; align-items:center; padding:0 48px; }
+.main-nav a { color:#BBB; text-decoration:none; font-size:13.5px; padding:15px 15px; display:block; white-space:nowrap; transition:color .15s; }
+.main-nav a:hover { color:#fff; }
+.main-nav a.active { color:#fff; border-bottom:3px solid var(--red); }
+.nav-spacer { flex:1; }
+.nav-webshop { background:var(--red)!important; color:#fff!important; margin:7px 0; padding:8px 18px!important; border-radius:2px; font-weight:600!important; }
+
+.page-hero { background:#1A1A1A; padding:72px 48px; }
+.page-hero-inner { max-width:1100px; margin:0 auto; display:grid; grid-template-columns:1fr 380px; gap:64px; align-items:center; }
+.page-hero h1 { font-size:34px; font-weight:700; line-height:1.3; margin-bottom:20px; color:#fff; }
+.page-hero .lead { font-size:16px; color:#AAA; line-height:1.8; }
+.hero-cta-box { background:#252525; border:1px solid #333; border-top:4px solid var(--red); padding:32px; }
+.hero-cta-box h3 { font-size:17px; font-weight:700; margin-bottom:12px; color:#fff; }
+.hero-cta-box p { font-size:14px; color:#AAA; line-height:1.65; margin-bottom:20px; }
+.btn-red { display:inline-block; background:var(--red); color:#fff; font-size:12px; font-weight:700; letter-spacing:.8px; text-transform:uppercase; padding:14px 22px; text-decoration:none; transition:background .15s; width:100%; text-align:center; }
+.btn-red:hover { background:var(--red-dark); }
+.btn-note { font-size:12px; color:#888; margin-top:10px; font-style:italic; text-align:center; }
+
+.section { padding:72px 0; }
+.section.bg-light { background:var(--light); }
+.inner { max-width:1100px; margin:0 auto; padding:0 48px; }
+.stag { font-size:10.5px; letter-spacing:2.5px; text-transform:uppercase; color:var(--red); font-weight:600; margin-bottom:10px; }
+.sh2 { font-size:30px; font-weight:700; margin-bottom:16px; line-height:1.3; }
+.slead { font-size:15px; color:var(--muted); max-width:660px; line-height:1.75; margin-bottom:44px; }
+
+/* COMPARE */
+.compare-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:44px; }
+.compare-col { padding:32px; border:1px solid var(--border); }
+.compare-col.bad { border-top:4px solid #DDD; }
+.compare-col.good { border-top:4px solid var(--red); background:var(--light); }
+.compare-col h3 { font-size:16px; font-weight:700; margin-bottom:20px; }
+.compare-col.good h3 { color:var(--red); }
+.compare-item { display:flex; align-items:flex-start; gap:10px; margin-bottom:12px; font-size:14px; line-height:1.6; }
+.ci-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; margin-top:5px; }
+.ci-dot.bad { background:#CCC; }
+.ci-dot.good { background:var(--red); }
+.compare-note { font-size:14px; color:var(--muted); font-style:italic; margin-top:20px; padding-top:16px; border-top:1px solid var(--border); }
+
+/* SERVICES */
+.services-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+.service-card { background:#fff; border:1px solid var(--border); border-left:4px solid var(--red); padding:28px; }
+.service-card h3 { font-size:16px; font-weight:700; margin-bottom:10px; }
+.service-card p { font-size:14px; color:var(--muted); line-height:1.7; }
+
+/* STAKES */
+.stakes { background:#1A1A1A; padding:72px 0; }
+.stakes-inner { max-width:1100px; margin:0 auto; padding:0 48px; }
+.stakes .stag { color:var(--red); }
+.stakes h2 { font-size:30px; font-weight:700; color:#fff; margin-bottom:20px; line-height:1.3; }
+.stakes p { font-size:15.5px; color:#BBB; line-height:1.8; max-width:700px; margin-bottom:16px; }
+
+/* PROCESS */
+.process-grid { display:grid; grid-template-columns:repeat(3,1fr); border:1px solid var(--border); margin-top:44px; }
+.process-step { padding:32px 28px; border-right:1px solid var(--border); }
+.process-step:last-child { border-right:none; }
+.step-no { font-size:48px; font-weight:700; color:var(--border); line-height:1; margin-bottom:12px; }
+.process-step h3 { font-size:16px; font-weight:700; margin-bottom:10px; }
+.process-step p { font-size:14px; color:var(--muted); line-height:1.65; }
+
+/* GUARANTEE */
+.guarantee-box { background:var(--light); border:1px solid var(--border); border-left:6px solid var(--red); padding:32px 40px; margin-top:44px; display:flex; justify-content:space-between; align-items:center; gap:32px; }
+.guarantee-box div p { font-size:14px; color:var(--muted); max-width:580px; line-height:1.7; margin-top:8px; }
+.btn-red-sm { display:inline-block; background:var(--red); color:#fff; font-size:12px; font-weight:700; letter-spacing:.8px; text-transform:uppercase; padding:14px 24px; text-decoration:none; white-space:nowrap; flex-shrink:0; }
+
+.cta-banner { background:#1A1A1A; padding:72px 48px; text-align:center; border-top:4px solid var(--red); }
+.cta-banner em { display:block; font-size:20px; font-style:italic; color:#888; margin-bottom:8px; }
+.cta-banner h2 { font-size:30px; font-weight:700; color:#fff; margin-bottom:14px; }
+.cta-banner p { font-size:15px; color:#AAA; margin-bottom:28px; }
+.btn-white { display:inline-block; background:var(--red); color:#fff; font-size:12px; font-weight:700; letter-spacing:.8px; text-transform:uppercase; padding:16px 32px; text-decoration:none; border:2px solid var(--red); }
+.btn-note-white { font-size:13px; color:rgba(255,255,255,.65); margin-top:14px; font-style:italic; }
+footer { background:var(--nav); padding:28px 48px; display:flex; justify-content:space-between; align-items:center; gap:20px; }
+.footer-info { font-size:13px; color:#888; }
+.footer-info a { color:#AAA; text-decoration:none; }
+.footer-copy { font-size:12px; color:#555; }
+
+/* DROPDOWN CSS-ONLY */
+.nav-dropdown { position:relative; align-self:stretch; display:flex; align-items:center; }
+.nav-dropdown:hover .dropdown-menu { display:block; }
+.dropdown-menu {
+  display:none;
+  position:absolute;
+  top:100%;
+  left:0;
+  background:#252525;
+  min-width:240px;
+  z-index:1000;
+  border-top:3px solid var(--red);
+  box-shadow:0 8px 24px rgba(0,0,0,.35);
+}
+.dropdown-menu a {
+  display:block;
+  color:#BBBBBB!important;
+  font-size:13px!important;
+  padding:13px 20px!important;
+  border-bottom:1px solid #333;
+  white-space:nowrap;
+  transition:background .15s, color .15s;
+}
+.dropdown-menu a:last-child { border-bottom:none; }
+.dropdown-menu a:hover { background:#333; color:#fff!important; }
+
+</style>
+
+  <!-- PRIMARY META -->
+  <meta name="title" content="Könyvelő működő vállalkozásoknak – FGA.hu | Proaktív, nem reaktív">
+  <meta name="description" content="Működő vállalkozásod van és elégedetlen a könyvelőddel? Havi riport, proaktív jelzések, adóoptimalizálás, dedikált kapcsolattartó. 100% szakmai garancia.">
+  <meta name="keywords" content="könyvelő működő vállalkozásnak, vállalkozás könyvelés budapest, cég könyvelő budapest, kft könyvelő, bt könyvelő, proaktív könyvelő, havi könyvelési riport, adóoptimalizálás vállalkozás, bérszámfejtés budapest, cafeteria könyvelés, áfabevallás, társasági adó bevallás, iparűzési adó, könyvelő csere, könyvelőváltás működő cég, dedikált könyvelő, könyvelő 50 millió felett, könyvelő 100 millió felett, növekvő cég könyvelő, könyvelési szolgáltatás ár, könyvelő kis középvállalkozás, kkv könyvelő, vállalkozói számla, kettős könyvvitel, egyszeres könyvvitel">
+  <meta name="author" content="FGA Hungary Kft.">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <link rel="canonical" href="https://fga.hu/mukodo-vallalkozasoknak/">
+  <meta name="geo.region" content="HU-BU">
+  <meta name="geo.placename" content="Budapest">
+
+  <!-- OPEN GRAPH -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://fga.hu/mukodo-vallalkozasoknak/">
+  <meta property="og:title" content="Könyvelő működő vállalkozásoknak – FGA.hu">
+  <meta property="og:description" content="Havi riport, proaktív jelzések, adóoptimalizálás. Tudod, mennyi pénzed van – azt már nem, hogy miért. Mi megmutatjuk.">
+  <meta property="og:image" content="https://fga.hu/og-mukodo.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="FGA.hu">
+  <meta property="og:locale" content="hu_HU">
+
+  <!-- TWITTER CARD -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Könyvelő működő vállalkozásoknak – FGA.hu">
+  <meta name="twitter:description" content="Proaktív könyvelés. Havi riport, adóoptimalizálás, 100% garancia.">
+  <meta name="twitter:image" content="https://fga.hu/og-mukodo.jpg">
+  <meta name="theme-color" content="#C8001E">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AccountingService",
+  "name": "FGA Hungary Kft.",
+  "alternateName": "FGA.hu",
+  "url": "https://fga.hu",
+  "logo": "https://fga.hu/logo.png",
+  "image": "https://fga.hu/og-image.jpg",
+  "description": "Proaktív könyvelési szolgáltatás vállalkozásoknak Budapesten. 16+ év tapasztalat, 147 sikeres könyvelőváltás, 100% szakmai garancia.",
+  "telephone": "+36-70-885-7806",
+  "email": "info@fga.hu",
+  "foundingDate": "2008",
+  "priceRange": "$",
+  "currenciesAccepted": "HUF",
+  "paymentAccepted": "Átutalás, bankkártya",
+  "areaServed": {
+    "@type": "Country",
+    "name": "Hungary"
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Thököly út 159.",
+    "addressLocality": "Budapest",
+    "postalCode": "1146",
+    "addressRegion": "Budapest",
+    "addressCountry": "HU"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "47.5044",
+    "longitude": "19.1003"
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+      "opens": "08:00",
+      "closes": "17:00"
+    }
+  ],
+  "sameAs": [
+    "https://webshopkonyveles.hu"
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Könyvelési szolgáltatások",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Könyvelés induló vállalkozásoknak",
+          "description": "Teljes körű könyvelési szolgáltatás induló vállalkozások számára, beleértve az adótanácsadást és a bejelentkezési segítséget."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Könyvelés működő vállalkozásoknak",
+          "description": "Proaktív könyvelés, havi riport, bérszámfejtés és adóoptimalizálás működő vállalkozásoknak."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Könyvelőváltás",
+          "description": "Zökkenőmentes könyvelőváltás – az átadás-átvételt mi intézzük, 30 nap alatt teljes rend."
+        }
+      }
+    ]
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "47",
+    "bestRating": "5",
+    "worstRating": "1"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type":"ListItem","position":1,"name":"Főoldal","item":"https://fga.hu/"},
+    {"@type":"ListItem","position":2,"name":"Működő vállalkozásoknak","item":"https://fga.hu/mukodo-vallalkozasoknak/"}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Mit tartalmaz a havi könyvelési riport?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Minden hónap elején küldünk egy érthető összefoglalót: bevétel, kiadás, adóterhek, cash flow – emberi nyelven. Nem Excel, nem zsargon – amit tényleg értesz és felhasználsz a döntéseknél."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Bérszámfejtés is benne van a könyvelési díjban?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Igen. Ha alkalmazottaid vannak, a bérszámfejtés az alapszolgáltatás része – nem külön megbízásból. Bérek, járulékok, cafeteria, belépők, kilépők – minden határidőre."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Mikor érdemes váltani könyvelőt működő vállalkozásnál?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ha a könyvelőd csak reaktív (nem kezdeményez), ha nem érted a havi anyagot, ha sosem javasol optimalizálást – ezek mind jelek. Egy 50M+ Ft-os forgalmú cégnél a reaktív könyvelő milliókba kerülhet."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="top-bar">
+  <div class="logo">fga<sub>.hu</sub></div>
+  <div class="phone-block">
+    <div class="tagline">Több mint 16 év tapasztalattal könyvelésben verhetetlen.</div>
+    <div class="phone">+36 70 885-7806</div>
+  </div>
+</header>
+
+<nav class="main-nav">
+  <a href="fga-01-fooldal.html">Főoldal</a>
+  <div class="nav-dropdown">
+    <a href="#" class="active" style="padding:15px 15px;display:block;">Megoldásaink ▾</a>
+    <div class="dropdown-menu">
+      <a href="/fga-02-indulo.html">Induló vállalkozásoknak</a>
+      <a href="/fga-03-mukodo.html">Működő vállalkozásoknak</a>
+    </div>
+  </div>
+  <a href="fga-04-konyvelovaltas.html">Könyvelőváltás</a>
+  <a href="fga-05-arak.html">Könyvelési árak 2026</a>
+  <a href="fga-06-kapcsolat.html">Kapcsolat</a>
+  <div class="nav-spacer"></div>
+  <a href="#" class="nav-webshop">Webshopod van? →</a>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div>
+      <h1>Működik a céged. De tudod-e, hogy mennyibe kerül a könyvelőd csendje?</h1>
+      <p class="lead">Nem a számlája. Hanem az, amit nem mond el. Az optimalizálási lehetőség, amit nem jelez. A jogszabályváltozás, amiről nem tájékoztat. A minta a számaidban, amit senki sem vesz észre – mert senki sem nézi.</p>
+    </div>
+    <div class="hero-cta-box">
+      <h3>0 Ft-os áttekintés</h3>
+      <p>30 perc. Megnézzük a jelenlegi helyzetedet, és megmondjuk őszintén, hol vannak a lehetőségek.</p>
+      <a href="fga-06-kapcsolat.html" class="btn-red">Kérek egy 0 Ft-os áttekintést »</a>
+      <p class="btn-note">Megmondjuk őszintén, ha nem mi vagyunk a legjobb választás.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="inner">
+    <div class="stag">A különbség</div>
+    <h2 class="sh2">Mindkettő leadja a bevallásokat.<br>Csak az egyik ott is van a kettő között.</h2>
+    <p class="slead">Egy működő vállalkozásnál a könyvelés már nem csak adminisztráció. A számaiddal döntéseket hozol – beruházásról, munkaerőről, árképzésről. Ha ezek a számok hiányosak, késnek, vagy senki sem magyarázza el őket, akkor vakon vezetsz.</p>
+    <div class="compare-grid">
+      <div class="compare-col bad">
+        <h3>Amit a legtöbb vállalkozó elvár</h3>
+        <div class="compare-item"><div class="ci-dot bad"></div><span>Leadja a bevallásokat határidőre</span></div>
+        <div class="compare-item"><div class="ci-dot bad"></div><span>Nem kerül bajba miatta</span></div>
+        <div class="compare-item"><div class="ci-dot bad"></div><span>Elérhető, ha kérdés van</span></div>
+        <p class="compare-note">Ha ez elég neked – maradj a jelenlegi könyvelőnél. Egy jó könyvelő ritka – tartsd meg.</p>
+      </div>
+      <div class="compare-col good">
+        <h3>Amit egy jó könyvelő valójában ad</h3>
+        <div class="compare-item"><div class="ci-dot good"></div><span>Havonta érthető képet a cég pénzügyi helyzetéről</span></div>
+        <div class="compare-item"><div class="ci-dot good"></div><span>Jelzést, ha valami változik, ami érinti a vállalkozást</span></div>
+        <div class="compare-item"><div class="ci-dot good"></div><span>Proaktív javaslatot, ha optimalizálási lehetőséget lát</span></div>
+        <div class="compare-item"><div class="ci-dot good"></div><span>Választ a kérdésekre – mielőtt fel kellene tenni őket</span></div>
+        <div class="compare-item"><div class="ci-dot good"></div><span>Biztonságot, hogy valaki figyel – nemcsak a határidőkre</span></div>
+        <p class="compare-note">Ha ez az, amit szeretnél – érdemes beszélnünk.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section bg-light">
+  <div class="inner">
+    <div class="stag">Miben segítünk</div>
+    <h2 class="sh2">Nem csak könyveljük a cégedet – mellette vagyunk</h2>
+    <p class="slead">Minden, amit egy működő vállalkozásnak egy könyvelőtől kapnia kellene – de a legtöbbnél nincs benne.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <h3>Havi érthető riport</h3>
+        <p>Minden hónap elején kapsz egy összefoglalót: bevétel, kiadás, adóterhek, cash flow – emberi nyelven leírva. Nem azért, mert kötelező. Azért, mert döntéseket csak tiszta számokból lehet jól hozni.</p>
+      </div>
+      <div class="service-card">
+        <h3>Proaktív jelzések</h3>
+        <p>Ha változik a jogszabály, ami érinti a vállalkozásodat – szólunk. Ha látjuk, hogy az adózási formád már nem optimális a bevételi szintedhez – szólunk. Ha valami mintát látunk a számaidban, amin érdemes gondolkodni – szólunk.</p>
+      </div>
+      <div class="service-card">
+        <h3>Bérszámfejtés és munkaügyek</h3>
+        <p>Ha alkalmazottaid vannak, a bérszámfejtés is részünk – nem külön megbízásból, hanem az alapszolgáltatás részeként. Bérek, járulékok, cafeteria, belépők, kilépők – minden határidőre, pontosan.</p>
+      </div>
+      <div class="service-card">
+        <h3>Adóoptimalizálás</h3>
+        <p>Évente legalább egyszer átnézzük az adózási helyzetedet – van-e lehetőség csökkenteni a terheket, érdemes-e változtatni valamit a struktúrán. Ez az, amit minden könyvelőnek alapból kellene csinálnia – de a legtöbb nem csinálja.</p>
+      </div>
+      <div class="service-card">
+        <h3>Dedikált kapcsolattartó</h3>
+        <p>Nem egy call centert hívol, ahol mindig más veszi fel. Mindig ugyanaz a személy kezeli a cégedet – aki ismeri a történetedet, az iparágadat, a szokásaidat. Nem kell minden alkalommal újra magyarázni, hol tartasz.</p>
+      </div>
+      <div class="service-card">
+        <h3>100% szakmai garancia</h3>
+        <p>A munkánkra 100% szakmai garanciát vállalunk. Ha a mi hibánkból keletkezik bírság, mulasztás vagy hátrány – mi viseljük a következményét. Szerződéses kötelezettség, nem szlogen.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="stakes">
+  <div class="stakes-inner">
+    <div class="stag">Mikor érdemes váltani</div>
+    <h2>Ha már működik a céged, a tét nagyobb</h2>
+    <p>Induló vállalkozásnál egy könyvelési hiba bosszantó. Egy 50M Ft-os forgalmú cégnél ugyanaz a hiba százezrekben vagy milliókban mérhető. Minél nagyobb a cég, annál fontosabb, hogy a könyvelő ne csak reaktív legyen – hanem aktívan figyeljen.</p>
+    <p>Ha most arra gondolsz, hogy az enyém is csak reaktív – ez nem személyes kritika a könyvelőd felé. Egyszerűen a legtöbb könyvelő így van felépítve. A kérdés az, hogy te megengedheted-e magadnak ezt a modellt.</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="inner">
+    <div class="stag">A váltás menete</div>
+    <h2 class="sh2">3 lépés, tőled minimális energia</h2>
+    <p class="slead" style="margin-bottom:0;">Nem kell magyarázkodni a régi könyvelőnek, nem kell papírokat intézni. Mi csináljuk.</p>
+    <div class="process-grid">
+      <div class="process-step">
+        <div class="step-no">01</div>
+        <h3>0 Ft-os áttekintés</h3>
+        <p>30 perc, megnézzük a jelenlegi helyzetedet. Hol tartasz, mi az, ami rendben van, mi az, amin érdemes változtatni. Konkrét képet kapsz – nem értékesítési prezentációt.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-no">02</div>
+        <h3>Mi intézzük az átadást</h3>
+        <p>Felvesszük a kapcsolatot a régi könyvelőddel, bekérjük az anyagokat, gondoskodunk a folytonosságról. Neked nem kell magyarázkodnod. Ez a mi dolgunk.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-no">03</div>
+        <h3>30 nap alatt teljes rend</h3>
+        <p>Egy hónap elteltével teljes rálátásod van a céged pénzügyi helyzetére. Érteni fogod, mi történik – nem csak bízol benne.</p>
+      </div>
+    </div>
+    <div class="guarantee-box">
+      <div>
+        <strong style="font-size:17px;">Ha hibázunk, mi rendezzük</strong>
+        <p>A könyvelési munkánkra 100% szakmai garanciát vállalunk. Ha a mi hibánkból keletkezik bírság, mulasztás vagy bármilyen hátrány – mi viseljük a következményét. Szerződéses kötelezettség, nem szlogen.</p>
+      </div>
+      <a href="fga-06-kapcsolat.html" class="btn-red-sm">Kérek egy 0 Ft-os áttekintést »</a>
+    </div>
+  </div>
+</div>
+
+<div class="cta-banner">
+  <em>A legjobb időpont egy évvel ezelőtt lett volna.</em>
+  <h2>A második legjobb most van.</h2>
+  <p>0 Ft-os áttekintés – 30 perc, konkrét válaszok, semmilyen elköteleződés nélkül.</p>
+  <a href="fga-06-kapcsolat.html" class="btn-white">Kérek egy 0 Ft-os áttekintést »</a>
+  <p class="btn-note-white">Megmondjuk őszintén, ha nem mi vagyunk a legjobb választás.</p>
+</div>
+
+<footer>
+  <div class="logo" style="border-color:#444;">fga<sub style="font-size:9px;letter-spacing:2px;">.hu</sub></div>
+  <div class="footer-info">FGA Hungary Kft. &nbsp;|&nbsp; 1146 Budapest, Thököly út 159. &nbsp;|&nbsp; <a href="/cdn-cgi/l/email-protection#9ff6f1f9f0dff9f8feb1f7ea"><span class="__cf_email__" data-cfemail="aac3c4ccc5eacccdcb84c2df">[email&#160;protected]</span></a> &nbsp;|&nbsp; <a href="tel:+3670885-78

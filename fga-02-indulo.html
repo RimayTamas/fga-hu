@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title></title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --red:#C8001E; --red-dark:#9E0018; --nav:#1C1C1C; --text:#1A1A1A; --muted:#555; --light:#F7F5F2; --border:#DEDADA; }
+body { font-family:-apple-system,'Segoe UI',Arial,sans-serif; color:var(--text); background:#fff; font-size:15px; line-height:1.6; }
+.top-bar { background:var(--red); padding:14px 48px; display:flex; justify-content:space-between; align-items:center; }
+.logo { border:2.5px solid #fff; padding:5px 12px 4px; color:#fff; font-size:21px; font-weight:700; line-height:1.1; display:inline-block; }
+.logo sub { font-size:9px; letter-spacing:2px; font-weight:400; display:block; }
+.phone-block { text-align:right; color:#fff; }
+.phone-block .tagline { font-size:12px; opacity:.85; margin-bottom:2px; }
+.phone-block .phone { font-size:26px; font-weight:700; }
+.main-nav { background:var(--nav); display:flex; align-items:center; padding:0 48px; }
+.main-nav a { color:#BBB; text-decoration:none; font-size:13.5px; padding:15px 15px; display:block; white-space:nowrap; transition:color .15s; }
+.main-nav a:hover { color:#fff; }
+.main-nav a.active { color:#fff; border-bottom:3px solid var(--red); }
+.nav-spacer { flex:1; }
+.nav-webshop { background:var(--red)!important; color:#fff!important; margin:7px 0; padding:8px 18px!important; border-radius:2px; font-weight:600!important; }
+
+/* PAGE HERO */
+.page-hero { background:var(--light); border-bottom:1px solid var(--border); padding:64px 48px; }
+.page-hero-inner { max-width:1100px; margin:0 auto; display:grid; grid-template-columns:1fr 400px; gap:64px; align-items:center; }
+.page-hero h1 { font-size:34px; font-weight:700; line-height:1.3; margin-bottom:20px; }
+.page-hero .lead { font-size:16px; color:var(--muted); line-height:1.8; }
+.hero-cta-box { background:#fff; border:1px solid var(--border); border-top:4px solid var(--red); padding:32px; }
+.hero-cta-box h3 { font-size:17px; font-weight:700; margin-bottom:12px; }
+.hero-cta-box p { font-size:14px; color:var(--muted); line-height:1.65; margin-bottom:20px; }
+.btn-red { display:inline-block; background:var(--red); color:#fff; font-size:12px; font-weight:700; letter-spacing:.8px; text-transform:uppercase; padding:14px 22px; text-decoration:none; transition:background .15s; width:100%; text-align:center; }
+.btn-red:hover { background:var(--red-dark); }
+.btn-note { font-size:12px; color:var(--muted); margin-top:10px; font-style:italic; text-align:center; }
+
+/* SECTIONS */
+.section { padding:72px 0; }
+.section.bg-light { background:var(--light); }
+.inner { max-width:1100px; margin:0 auto; padding:0 48px; }
+.stag { font-size:10.5px; letter-spacing:2.5px; text-transform:uppercase; color:var(--red); font-weight:600; margin-bottom:10px; }
+.sh2 { font-size:30px; font-weight:700; margin-bottom:16px; line-height:1.3; }
+.slead { font-size:15px; color:var(--muted); max-width:660px; line-height:1.75; margin-bottom:44px; }
+
+/* ITEMS WITH EXPAND */
+.item-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+.item-card { background:#fff; border:1px solid var(--border); border-left:4px solid var(--red); padding:28px 28px; }
+.item-card.full { grid-column:1/-1; }
+.item-card h3 { font-size:16px; font-weight:700; margin-bottom:10px; color:var(--text); }
+.item-card p { font-size:14px; color:var(--muted); line-height:1.7; }
+
+/* MISTAKES */
+.mistakes-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:44px; }
+.mistake { background:#fff; border:1px solid var(--border); border-top:4px solid #CC3333; padding:28px; }
+.mistake-num { font-size:36px; font-weight:700; color:#EEE; line-height:1; margin-bottom:12px; }
+.mistake h3 { font-size:15px; font-weight:700; margin-bottom:10px; color:#CC3333; }
+.mistake p { font-size:14px; color:var(--muted); line-height:1.7; }
+
+/* WHY US */
+.why-us { background:#1A1A1A; padding:72px 0; }
+.why-us-inner { max-width:1100px; margin:0 auto; padding:0 48px; }
+.why-us .stag { color:var(--red); }
+.why-us h2 { font-size:30px; font-weight:700; color:#fff; margin-bottom:20px; line-height:1.3; }
+.why-us p { font-size:15.5px; color:#BBB; line-height:1.8; max-width:700px; margin-bottom:16px; }
+
+/* CTA */
+.cta-banner { background:#1A1A1A; padding:72px 48px; text-align:center; border-top:4px solid var(--red); }
+.cta-banner em { display:block; font-size:20px; font-style:italic; color:#888; margin-bottom:8px; }
+.cta-banner h2 { font-size:30px; font-weight:700; color:#fff; margin-bottom:14px; }
+.cta-banner p { font-size:15px; color:#AAA; margin-bottom:28px; }
+.btn-white { display:inline-block; background:var(--red); color:#fff; font-size:12px; font-weight:700; letter-spacing:.8px; text-transform:uppercase; padding:16px 32px; text-decoration:none; border:2px solid var(--red); }
+.btn-note-white { font-size:13px; color:rgba(255,255,255,.65); margin-top:14px; font-style:italic; }
+
+footer { background:var(--nav); padding:28px 48px; display:flex; justify-content:space-between; align-items:center; gap:20px; }
+.footer-info { font-size:13px; color:#888; }
+.footer-info a { color:#AAA; text-decoration:none; }
+.footer-copy { font-size:12px; color:#555; }
+
+/* DROPDOWN CSS-ONLY */
+.nav-dropdown { position:relative; align-self:stretch; display:flex; align-items:center; }
+.nav-dropdown:hover .dropdown-menu { display:block; }
+.dropdown-menu {
+  display:none;
+  position:absolute;
+  top:100%;
+  left:0;
+  background:#252525;
+  min-width:240px;
+  z-index:1000;
+  border-top:3px solid var(--red);
+  box-shadow:0 8px 24px rgba(0,0,0,.35);
+}
+.dropdown-menu a {
+  display:block;
+  color:#BBBBBB!important;
+  font-size:13px!important;
+  padding:13px 20px!important;
+  border-bottom:1px solid #333;
+  white-space:nowrap;
+  transition:background .15s, color .15s;
+}
+.dropdown-menu a:last-child { border-bottom:none; }
+.dropdown-menu a:hover { background:#333; color:#fff!important; }
+
+</style>
+
+  <!-- PRIMARY META -->
+  <meta name="title" content="Könyvelő induló vállalkozásoknak – FGA.hu Budapest">
+  <meta name="description" content="Induló vállalkozásod van? Az első hetek döntik el a pénzügyi rendet. ÁFA-státusz, bejelentkezés, számviteli rend – segítünk az elején, hogy ne kelljen utólag rendezni.">
+  <meta name="keywords" content="könyvelő induló vállalkozásnak, vállalkozás indítás könyvelő, kezdő vállalkozó könyvelő, induló vállalkozás adózás, egyéni vállalkozó könyvelő, kft alapítás könyvelő, áfa státusz választás, vállalkozás bejelentkezés, számviteli rend felállítás, induló vállalkozás bírság elkerülés, kata helyett könyvelő, kisadózó könyvelő, átalányadó könyvelő, kata 2024 könyvelő, alanyi mentes könyvelő, induló vállalkozás adótanácsadás, első éves könyvelő, vállalkozás első lépések, könyvelő budapest kezdő, freelancer könyvelő, önálló vállalkozó könyvelő">
+  <meta name="author" content="FGA Hungary Kft.">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <link rel="canonical" href="https://fga.hu/indulo-vallalkozasoknak/">
+  <meta name="geo.region" content="HU-BU">
+  <meta name="geo.placename" content="Budapest">
+
+  <!-- OPEN GRAPH -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://fga.hu/indulo-vallalkozasoknak/">
+  <meta property="og:title" content="Könyvelő induló vállalkozásoknak – FGA.hu">
+  <meta property="og:description" content="Az első hetek döntik el a pénzügyi rendet. ÁFA-státusz, bejelentkezési határidők, számviteli rend – segítünk az elején. 0 Ft-os konzultáció.">
+  <meta property="og:image" content="https://fga.hu/og-indulo.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="FGA.hu">
+  <meta property="og:locale" content="hu_HU">
+
+  <!-- TWITTER CARD -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Könyvelő induló vállalkozásoknak – FGA.hu">
+  <meta name="twitter:description" content="Az első hetek döntik el a pénzügyi rendet. 0 Ft-os konzultáció.">
+  <meta name="twitter:image" content="https://fga.hu/og-indulo.jpg">
+  <meta name="theme-color" content="#C8001E">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AccountingService",
+  "name": "FGA Hungary Kft.",
+  "alternateName": "FGA.hu",
+  "url": "https://fga.hu",
+  "logo": "https://fga.hu/logo.png",
+  "image": "https://fga.hu/og-image.jpg",
+  "description": "Proaktív könyvelési szolgáltatás vállalkozásoknak Budapesten. 16+ év tapasztalat, 147 sikeres könyvelőváltás, 100% szakmai garancia.",
+  "telephone": "+36-70-885-7806",
+  "email": "info@fga.hu",
+  "foundingDate": "2008",
+  "priceRange": "$",
+  "currenciesAccepted": "HUF",
+  "paymentAccepted": "Átutalás, bankkártya",
+  "areaServed": {
+    "@type": "Country",
+    "name": "Hungary"
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Thököly út 159.",
+    "addressLocality": "Budapest",
+    "postalCode": "1146",
+    "addressRegion": "Budapest",
+    "addressCountry": "HU"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "47.5044",
+    "longitude": "19.1003"
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+      "opens": "08:00",
+      "closes": "17:00"
+    }
+  ],
+  "sameAs": [
+    "https://webshopkonyveles.hu"
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Könyvelési szolgáltatások",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Könyvelés induló vállalkozásoknak",
+          "description": "Teljes körű könyvelési szolgáltatás induló vállalkozások számára, beleértve az adótanácsadást és a bejelentkezési segítséget."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Könyvelés működő vállalkozásoknak",
+          "description": "Proaktív könyvelés, havi riport, bérszámfejtés és adóoptimalizálás működő vállalkozásoknak."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Könyvelőváltás",
+          "description": "Zökkenőmentes könyvelőváltás – az átadás-átvételt mi intézzük, 30 nap alatt teljes rend."
+        }
+      }
+    ]
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "47",
+    "bestRating": "5",
+    "worstRating": "1"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type":"ListItem","position":1,"name":"Főoldal","item":"https://fga.hu/"},
+    {"@type":"ListItem","position":2,"name":"Induló vállalkozásoknak","item":"https://fga.hu/indulo-vallalkozasoknak/"}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Mikor kell könyvelőt keresni induló vállalkozásnak?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Az első naptól számít – nem az első bevételtől. Az ÁFA-státusz, a bejelentkezési kötelezettségek és a számviteli rend felállítása mind az indulásnál kritikus döntések."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Egyéni vállalkozó vagy Kft. legyen az induló vállalkozás?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ez a tevékenységtől és a tervezett bevételi szinttől függ. Az FGA.hu-nál az 0 Ft-os konzultáción ezt is megbeszéljük, és segítünk a legjobb forma kiválasztásában."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Mi az ÁFA-státusz és miért fontos az első bevétel előtt?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Az ÁFA-státusz (alanyi mentes, normál áfás, stb.) meghatározza az adóterheket. Rosszul megválasztva hónapokig fizeted a következményét – ezért kell az első bevétel előtt dönteni."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Mennyibe kerül könyvelő induló vállalkozásnak?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Az induló vállalkozások könyvelési díja általában a legalacsonyabb kategóriában van, mivel kevesebb bizonylat és egyszerűbb adózás jellemzi. Pontos árajánlatot 0 Ft-os áttekintés után adunk."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="top-bar">
+  <div class="logo">fga<sub>.hu</sub></div>
+  <div class="phone-block">
+    <div class="tagline">Több mint 16 év tapasztalattal könyvelésben verhetetlen.</div>
+    <div class="phone">+36 70 885-7806</div>
+  </div>
+</header>
+
+<nav class="main-nav">
+  <a href="fga-01-fooldal.html">Főoldal</a>
+  <div class="nav-dropdown">
+    <a href="#" class="active" style="padding:15px 15px;display:block;">Megoldásaink ▾</a>
+    <div class="dropdown-menu">
+      <a href="/fga-02-indulo.html">Induló vállalkozásoknak</a>
+      <a href="/fga-03-mukodo.html">Működő vállalkozásoknak</a>
+    </div>
+  </div>
+  <a href="fga-04-konyvelovaltas.html">Könyvelőváltás</a>
+  <a href="fga-05-arak.html">Könyvelési árak 2026</a>
+  <a href="fga-06-kapcsolat.html">Kapcsolat</a>
+  <div class="nav-spacer"></div>
+  <a href="#" class="nav-webshop">Webshopod van? →</a>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div>
+      <h1>Új vállalkozás, új kezdet – és pontosan most van az a pillanat, amikor a leendő problémák még olcsón megelőzhetők.</h1>
+      <p class="lead">Az első hetek nyugodtnak tűnnek. Még nincs ellenőrzés, még nincs bírság, még nincs probléma. De pontosan ez az az időszak, amikor a később évekig cipelt hibák beágyazódnak – vagy megelőzhetők. A legtöbb vállalkozó utólag mondja: ha ezt az elején tudtam volna, megspóroltam volna rengeteg felesleges stresszt és pénzt.</p>
+    </div>
+    <div class="hero-cta-box">
+      <h3>0 Ft-os első konzultáció</h3>
+      <p>30 perc. Megnézzük, hol tartasz, és mi az, amit most kell rendezni. Kötelezettség nélkül.</p>
+      <a href="fga-06-kapcsolat.html" class="btn-red">Kérek egy 0 Ft-os konzultációt »</a>
+      <p class="btn-note">Megmondjuk őszintén, ha nem mi vagyunk a legjobb választás.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="inner">
+    <div class="stag">Amit az elején kell rendezni</div>
+    <h2 class="sh2">Az első hetekben ezeket ne hagyd ki</h2>
+    <p class="slead">Az indulásnak konkrét kötelezettségei és határidői vannak – és ezeket nem az üzleti forgalom ütemezi, hanem a jogszabály. Aki az elején rendez, az később sokkal kevesebbet fizet – pénzben és idegességben egyaránt.</p>
+    <div class="item-grid">
+      <div class="item-card">
+        <h3>ÁFA-státusz eldöntése</h3>
+        <p>Az egyik legfontosabb döntés, amit az első bevétel előtt kell meghozni. Alanyi mentes, normál áfás, vagy esetleg különleges konstrukció? Rosszul megválasztva hónapokig fizeted a következményét. Jól megválasztva az első naptól optimális az adóterhed.</p>
+      </div>
+      <div class="item-card">
+        <h3>Bejelentkezési kötelezettségek</h3>
+        <p>Az indulásnak konkrét határidői vannak – és ezeket nem az üzleti forgalom ütemezi, hanem a jogszabály. Ha lekésed, bírság. Ha rosszul töltöd ki, módosítás és újabb procedúra. Az elején egy óra odafigyelés megspórol egy napnyi bosszúságot.</p>
+      </div>
+      <div class="item-card">
+        <h3>Számviteli rend felállítása</h3>
+        <p>Sokan azzal kezdik, hogy majd összeszednek mindent, és év végén rendezik. Ez az egyik legdrágább döntés, amit egy induló vállalkozó hozhat. Az utólag összeszedhető adatok töredékesek – és a hiányok mindig a legrosszabb pillanatban derülnek ki.</p>
+      </div>
+      <div class="item-card">
+        <h3>Bevallási naptár</h3>
+        <p>Mikor kell bevallani az áfát? Mikor a társasági adót? Mikor az iparűzésit? Ezek nem rugalmas határidők – és az első évben senki sem figyelmezteti, ha közelednek. Egy előre felállított naptár megvéd a feledékenység következményeitől.</p>
+      </div>
+      <div class="item-card full">
+        <h3>Egyéni vállalkozó vagy Kft.?</h3>
+        <p>Sokan az egyszerűbb úton indulnak el – aztán egy év múlva kiderül, hogy a tevékenységük és a bevételi szintjük alapján másik forma lett volna optimális. Az átállás lehetséges, de drágább és körülményesebb, mint az elején jól dönteni. Mi az első egyeztetésen elmegyünk ezen is.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="why-us">
+  <div class="why-us-inner">
+    <div class="stag">Miért mi</div>
+    <h2>Nem csak könyvelőd leszünk – hanem az első tanácsadód</h2>
+    <p>Az induló vállalkozások számára az első 6 hónap dönti el, milyen alapokra épül a cég pénzügyi rendje. Ezen később nehéz változtatni – nem lehetetlen, de mindig többe kerül, mint ha az elején jól van felállítva.</p>
+    <p>Mi nemcsak könyveljük a számláidat. Megmutatjuk, mire figyelj, mit kerülj el, és mi az, ami most még nem fontos, de fél év múlva az lesz. Nem általánosságban. A te vállalkozásodra, a te iparágadra, a te bevételi modelledre szabva.</p>
+    <p>Az első egyeztetés ingyenes. Ott kiderül, hogy tudunk-e valóban segíteni – ha nem, megmondjuk. Ha igen, az első lépéstől melleted vagyunk.</p>
+  </div>
+</div>
+
+<div class="section bg-light">
+  <div class="inner">
+    <div class="stag">Amit a legtöbben elfelejtnek</div>
+    <h2 class="sh2">3 hiba, amit az induló vállalkozók többsége elkövet</h2>
+    <div class="mistakes-grid">
+      <div class="mistake">
+        <div class="mistake-num">01</div>
+        <h3>Késői könyvelő keresés</h3>
+        <p>Sokan csak akkor keresnek könyvelőt, amikor már van bevételük – vagy amikor már gond van. A könyvelő az első naptól számít, nem az első bevételtől. Az első döntések – ÁFA, forma, bejelentkezés – mind könyvelői kérdések.</p>
+      </div>
+      <div class="mistake">
+        <div class="mistake-num">02</div>
+        <h3>Mindent maguk intéznek</h3>
+        <p>Az első évben vonzó opciónak tűnik a költségek csökkentése érdekében mindent magának csinálni. Aztán kiderül, hogy a könyvelési hibák korrekciója többe kerül, mint maga a könyvelés lett volna.</p>
+      </div>
+      <div class="mistake">
+        <div class="mistake-num">03</div>
+        <h3>Nem kérdeznek</h3>
+        <p>Az induló vállalkozók egy része nem kérdez – mert azt hiszi, hogy a kérdés extra pénzbe kerül. Nálunk minden kérdés benne van az árban. Ez nem kivétel – ez az alapszolgáltatás.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="cta-banner">
+  <em>A legjobb időpont egy évvel ezelőtt lett volna.</em>
+  <h2>A második legjobb most van.</h2>
+  <p>0 Ft-os első konzultáció – 30 perc, konkrét válaszok, semmilyen elköteleződés nélkül.</p>
+  <a href="fga-06-kapcsolat.html" class="btn-white">Kérek egy 0 Ft-os konzultációt »</a>
+  <p class="btn-note-white">Megmondjuk őszintén, ha nem mi vagyunk a legjobb választás.</p>
+</div>
+
+<footer>
+  <div class="logo" style="border-color:#444;">fga<sub style="font-size:9px;letter-spacing:2px;">.hu</sub></div>
+  <div class="footer-info">FGA Hungary Kft. &nbsp;|&nbsp; 1146 Budapest, Thököly út 159. &nbsp;|&nbsp; <a href="/cdn-cgi/l/email-protection#e881868e87a88e8f89c6809d"><span class="__cf_email__" data-cfemail="61080f070e210706004f0914">[email&#160;protected]</span></a> &nbsp;|&nbsp; <a href="tel:+3670885-78

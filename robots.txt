@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://fga.hu/sitemap.xml
+
+# Blokkoltak
+Disallow: /admin/
+Disallow: /ugyfelkapu/
+Disallow: /*.json$

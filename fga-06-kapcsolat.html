@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title></title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --red:#C8001E; --red-dark:#9E0018; --nav:#1C1C1C; --text:#1A1A1A; --muted:#555; --light:#F7F5F2; --border:#DEDADA; }
+body { font-family:-apple-system,'Segoe UI',Arial,sans-serif; color:var(--text); background:#fff; font-size:15px; line-height:1.6; }
+.top-bar { background:var(--red); padding:14px 48px; display:flex; justify-content:space-between; align-items:center; }
+.logo { border:2.5px solid #fff; padding:5px 12px 4px; color:#fff; font-size:21px; font-weight:700; line-height:1.1; display:inline-block; }
+.logo sub { font-size:9px; letter-spacing:2px; font-weight:400; display:block; }
+.phone-block { text-align:right; color:#fff; }
+.phone-block .tagline { font-size:12px; opacity:.85; margin-bottom:2px; }
+.phone-block .phone { font-size:26px; font-weight:700; }
+.main-nav { background:var(--nav); display:flex; align-items:center; padding:0 48px; }
+.main-nav a { color:#BBB; text-decoration:none; font-size:13.5px; padding:15px 15px; display:block; white-space:nowrap; transition:color .15s; }
+.main-nav a:hover { color:#fff; }
+.main-nav a.active { color:#fff; border-bottom:3px solid var(--red); }
+.nav-spacer { flex:1; }
+.nav-webshop { background:var(--red)!important; color:#fff!important; margin:7px 0; padding:8px 18px!important; border-radius:2px; font-weight:600!important; }
+
+/* HERO */
+.page-hero { background:var(--light); border-bottom:1px solid var(--border); padding:72px 48px; }
+.page-hero-inner { max-width:1100px; margin:0 auto; }
+.page-hero h1 { font-size:52px; font-weight:700; line-height:1.1; margin-bottom:20px; }
+.page-hero .lead { font-size:17px; color:var(--muted); line-height:1.8; max-width:680px; }
+
+/* MAIN LAYOUT */
+.contact-layout { max-width:1100px; margin:0 auto; padding:72px 48px; display:grid; grid-template-columns:1fr 420px; gap:72px; }
+
+/* LEFT */
+.stag { font-size:10.5px; letter-spacing:2.5px; text-transform:uppercase; color:var(--red); font-weight:600; margin-bottom:20px; }
+.expect-items { display:flex; flex-direction:column; gap:0; border:1px solid var(--border); margin-bottom:40px; }
+.expect-item { padding:24px 28px; border-bottom:1px solid var(--border); display:grid; grid-template-columns:180px 1fr; gap:24px; }
+.expect-item:last-child { border-bottom:none; }
+.expect-label { font-size:14px; font-weight:700; color:var(--text); line-height:1.4; }
+.expect-text { font-size:14px; color:var(--muted); line-height:1.7; }
+
+/* CONTACT INFO */
+.contact-info { margin-top:40px; }
+.contact-info h3 { font-size:18px; font-weight:700; margin-bottom:20px; }
+.contact-items { display:flex; flex-direction:column; gap:14px; }
+.contact-item { display:flex; align-items:center; gap:14px; }
+.contact-icon { width:40px; height:40px; background:var(--light); border:1px solid var(--border); border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.contact-icon svg { width:16px; height:16px; }
+.contact-detail { font-size:14.5px; }
+.contact-detail strong { display:block; font-size:12px; letter-spacing:1px; text-transform:uppercase; color:var(--muted); font-weight:600; margin-bottom:2px; }
+.contact-detail a { color:var(--text); text-decoration:none; font-weight:600; }
+.contact-detail a:hover { color:var(--red); }
+
+/* FORM */
+.form-box { background:var(--light); border:1px solid var(--border); border-top:4px solid var(--red); padding:36px; position:sticky; top:24px; }
+.form-box h2 { font-size:22px; font-weight:700; margin-bottom:8px; }
+.form-box .form-lead { font-size:14px; color:var(--muted); margin-bottom:28px; line-height:1.6; }
+.form-group { margin-bottom:18px; }
+.form-group label { display:block; font-size:12px; letter-spacing:.8px; text-transform:uppercase; font-weight:600; color:var(--muted); margin-bottom:6px; }
+.form-group input, .form-group select, .form-group textarea {
+  width:100%; padding:12px 14px; border:1px solid var(--border); background:#fff;
+  font-family:inherit; font-size:14px; color:var(--text); outline:none;
+  transition:border-color .15s;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color:var(--red); }
+.form-group textarea { resize:vertical; min-height:90px; }
+.btn-red-full { display:block; width:100%; background:var(--red); color:#fff; font-size:12px; font-weight:700; letter-spacing:.8px; text-transform:uppercase; padding:16px; border:none; cursor:pointer; font-family:inherit; transition:background .15s; }
+.btn-red-full:hover { background:var(--red-dark); }
+.form-note { font-size:12px; color:var(--muted); margin-top:10px; text-align:center; font-style:italic; }
+
+/* CLOSING */
+.closing { background:#1A1A1A; padding:72px 48px; text-align:center; }
+.closing em { display:block; font-size:20px; font-style:italic; color:#888; margin-bottom:8px; }
+.closing strong { display:block; font-size:30px; font-weight:700; color:#fff; }
+
+footer { background:var(--nav); padding:28px 48px; display:flex; justify-content:space-between; align-items:center; gap:20px; }
+.footer-info { font-size:13px; color:#888; }
+.footer-info a { color:#AAA; text-decoration:none; }
+.footer-copy { font-size:12px; color:#555; }
+
+/* DROPDOWN CSS-ONLY */
+.nav-dropdown { position:relative; align-self:stretch; display:flex; align-items:center; }
+.nav-dropdown:hover .dropdown-menu { display:block; }
+.dropdown-menu {
+  display:none;
+  position:absolute;
+  top:100%;
+  left:0;
+  background:#252525;
+  min-width:240px;
+  z-index:1000;
+  border-top:3px solid var(--red);
+  box-shadow:0 8px 24px rgba(0,0,0,.35);
+}
+.dropdown-menu a {
+  display:block;
+  color:#BBBBBB!important;
+  font-size:13px!important;
+  padding:13px 20px!important;
+  border-bottom:1px solid #333;
+  white-space:nowrap;
+  transition:background .15s, color .15s;
+}
+.dropdown-menu a:last-child { border-bottom:none; }
+.dropdown-menu a:hover { background:#333; color:#fff!important; }
+
+</style>
+
+  <!-- PRIMARY META -->
+  <meta name="title" content="Kapcsolat – FGA.hu | Könyvelő Budapest – 0 Ft-os áttekintés">
+  <meta name="description" content="Vegye fel velünk a kapcsolatot! Ingyenes 30 perces áttekintés – konkrét válaszok, elköteleződés nélkül. Visszajelzünk 24 órán belül. FGA Hungary Kft., Budapest.">
+  <meta name="keywords" content="könyvelő kapcsolat budapest, könyvelő iroda budapest, könyvelő telefonszám, könyvelő email, könyvelő időpontfoglalás, ingyenes könyvelői konzultáció, könyvelő árajánlat, könyvelő áttekintés, fga hungary kapcsolat, fga.hu, könyvelő thököly út, könyvelő 1146 budapest, könyvelő iroda cím, könyvelő ajánlat kérés, könyvelő visszahívás">
+  <meta name="author" content="FGA Hungary Kft.">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <link rel="canonical" href="https://fga.hu/kapcsolat/">
+  <meta name="geo.region" content="HU-BU">
+  <meta name="geo.placename" content="Budapest">
+  <meta name="geo.position" content="47.5044;19.1003">
+  <meta name="ICBM" content="47.5044, 19.1003">
+
+  <!-- OPEN GRAPH -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://fga.hu/kapcsolat/">
+  <meta property="og:title" content="Kapcsolat – FGA.hu | Ingyenes könyvelői áttekintés">
+  <meta property="og:description" content="Ingyenes 30 perces áttekintés – konkrét válaszok, elköteleződés nélkül. 24 órán belül visszajelzünk.">
+  <meta property="og:image" content="https://fga.hu/og-kapcsolat.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="FGA.hu">
+  <meta property="og:locale" content="hu_HU">
+
+  <!-- TWITTER CARD -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Kapcsolat – FGA.hu Könyvelő Budapest">
+  <meta name="twitter:description" content="0 Ft-os áttekintés, 24 órán belüli visszajelzés.">
+  <meta name="twitter:image" content="https://fga.hu/og-kapcsolat.jpg">
+  <meta name="theme-color" content="#C8001E">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AccountingService",
+  "name": "FGA Hungary Kft.",
+  "alternateName": "FGA.hu",
+  "url": "https://fga.hu",
+  "logo": "https://fga.hu/logo.png",
+  "image": "https://fga.hu/og-image.jpg",
+  "description": "Proaktív könyvelési szolgáltatás vállalkozásoknak Budapesten. 16+ év tapasztalat, 147 sikeres könyvelőváltás, 100% szakmai garancia.",
+  "telephone": "+36-70-885-7806",
+  "email": "info@fga.hu",
+  "foundingDate": "2008",
+  "priceRange": "$",
+  "currenciesAccepted": "HUF",
+  "paymentAccepted": "Átutalás, bankkártya",
+  "areaServed": {
+    "@type": "Country",
+    "name": "Hungary"
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Thököly út 159.",
+    "addressLocality": "Budapest",
+    "postalCode": "1146",
+    "addressRegion": "Budapest",
+    "addressCountry": "HU"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "47.5044",
+    "longitude": "19.1003"
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+      "opens": "08:00",
+      "closes": "17:00"
+    }
+  ],
+  "sameAs": [
+    "https://webshopkonyveles.hu"
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Könyvelési szolgáltatások",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Könyvelés induló vállalkozásoknak",
+          "description": "Teljes körű könyvelési szolgáltatás induló vállalkozások számára, beleértve az adótanácsadást és a bejelentkezési segítséget."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Könyvelés működő vállalkozásoknak",
+          "description": "Proaktív könyvelés, havi riport, bérszámfejtés és adóoptimalizálás működő vállalkozásoknak."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Könyvelőváltás",
+          "description": "Zökkenőmentes könyvelőváltás – az átadás-átvételt mi intézzük, 30 nap alatt teljes rend."
+        }
+      }
+    ]
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "47",
+    "bestRating": "5",
+    "worstRating": "1"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type":"ListItem","position":1,"name":"Főoldal","item":"https://fga.hu/"},
+    {"@type":"ListItem","position":2,"name":"Kapcsolat","item":"https://fga.hu/kapcsolat/"}
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="top-bar">
+  <div class="logo">fga<sub>.hu</sub></div>
+  <div class="phone-block">
+    <div class="tagline">Több mint 16 év tapasztalattal könyvelésben verhetetlen.</div>
+    <div class="phone">+36 70 885-7806</div>
+  </div>
+</header>
+
+<nav class="main-nav">
+  <a href="fga-01-fooldal.html">Főoldal</a>
+  <div class="nav-dropdown">
+    <a href="#" style="padding:15px 15px;display:block;">Megoldásaink ▾</a>
+    <div class="dropdown-menu">
+      <a href="/fga-02-indulo.html">Induló vállalkozásoknak</a>
+      <a href="/fga-03-mukodo.html">Működő vállalkozásoknak</a>
+    </div>
+  </div>
+  <a href="fga-04-konyvelovaltas.html">Könyvelőváltás</a>
+  <a href="fga-05-arak.html">Könyvelési árak 2026</a>
+  <a href="fga-06-kapcsolat.html" class="active">Kapcsolat</a>
+  <div class="nav-spacer"></div>
+  <a href="#" class="nav-webshop">Webshopod van? →</a>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <h1>Beszéljünk.</h1>
+    <p class="lead">Ez nem értékesítési hívás. Nem fogjuk meggyőzni, hogy azonnal váltson. Az első egyeztetés célja az, hogy megértsük a helyzetét – és őszintén elmondjuk, tudunk-e valóban segíteni. Ha nem mi vagyunk a legjobb választás, megmondjuk azt is.</p>
+  </div>
+</div>
+
+<div class="contact-layout">
+  <div>
+    <div class="stag">Mire számítson</div>
+    <div class="expect-items">
+      <div class="expect-item">
+        <div class="expect-label">Nem eladunk – megértünk</div>
+        <div class="expect-text">Nem az a célunk, hogy az egyeztetés végén aláírjon valamit. Az a célunk, hogy 30 perc alatt tiszta képet kapjon: hol tart most, mi az, amin érdemes változtatni, és hogy mi tudunk-e ebben segíteni.</div>
+      </div>
+      <div class="expect-item">
+        <div class="expect-label">Nincs rossz kérdés</div>
+        <div class="expect-text">Ha valamit nem ért a jelenlegi könyvelésében – hozza fel. Ha nem tudja, mire figyeljen – kérdezze meg. Az egyeztetésen minden téma szóba kerülhet, ami a vállalkozása pénzügyeihez kapcsolódik.</div>
+      </div>
+      <div class="expect-item">
+        <div class="expect-label">Nincs nyomás, nincs határidő</div>
+        <div class="expect-text">Az első egyeztetés után döntheti el, hogy szeretne-e együttműködni. Semmit nem kell azonnal aláírni, és nem fogjuk sürgetni. Ha egy hét múlva dönt – rendben. Ha egy hónappal később – az is rendben.</div>
+      </div>
+
+    </div>
+
+    <div class="contact-info">
+      <h3>Találjon meg minket</h3>
+      <div class="contact-items">
+        <div class="contact-item">
+          <div class="contact-icon"><svg viewBox="0 0 16 16" fill="none"><path d="M3 3h10v10H3z" stroke="var(--red)" stroke-width="1.5"/><path d="M3 3l5 5 5-5" stroke="var(--red)" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+          <div class="contact-detail"><strong>E-mail</strong><a href="/cdn-cgi/l/email-protection#2c45424a436c4a4b4d024459"><span class="__cf_email__" data-cfemail="563f38303916303137783e23">[email&#160;protected]</span></a></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><svg viewBox="0 0 16 16" fill="none"><path d="M3 3c0 6.627 3.373 10 10 10l1-3-3-1-1 1c-1.5-1-2.5-2-3-3l1-1-1-3-3 1z" stroke="var(--red)" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+          <div class="contact-detail"><strong>Telefon</strong><a href="tel:+3670885-7806">+36 70 885-7806</a></div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="var(--red)" stroke-width="1.5"/><path d="M8 5v3l2 1.5" stroke="var(--red)" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+          <div class="contact-detail"><strong>Nyitvatartás</strong><span>H–P 8:00–17:00</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="form-box">
+      <h2>Írjon nekünk</h2>
+      <p class="form-lead">Az 0 Ft-os áttekintés után 24 órán belül felvesszük Önnel a kapcsolatot.</p>
+      <div class="form-group">
+        <label>Neve</label>
+        <input type="text" placeholder="Pl. Kovács János">
+      </div>
+      <div class="form-group">
+        <label>Telefonszám</label>
+        <input type="tel" placeholder="+36 XX XXX XXXX">
+      </div>
+      <div class="form-group">
+        <label>E-mail</label>
+        <input type="email" placeholder="email@example.hu">
+      </div>
+      <div class="form-group">
+        <label>Miben segíthetünk?</label>
+        <select>
+          <option value="">Válasszon...</option>
+          <option>Induló vállalkozás</option>
+          <option>Könyvelőváltás</option>
+          <option>Általános áttekintés</option>
+          <option>Egyéb</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Üzenet (nem kötelező)</label>
+        <textarea placeholder="Bármit, amit fontosnak tart..."></textarea>
+      </div>
+      <button class="btn-red-full">Küldés »</button>
+      <p class="form-note">Az adatait bizalmasan kezeljük, és kizárólag az egyeztetés megszervezéséhez használjuk fel.</p>
+    </div>
+  </div>
+</div>
+
+<div class="closing">
+  <em>A legjobb időpont egy évvel ezelőtt lett volna.</em>
+  <strong>A második legjobb most van.</strong>
+</div>
+
+<footer>
+  <div class="logo" style="border-color:#444;">fga<sub style="font-size:9px;letter-spacing:2px;">.hu</sub></div>
+  <div class="footer-info">FGA Hungary Kft. &nbsp;|&nbsp; 1146 Budapest, Thököly út 159. &nbsp;|&nbsp; <a href="/cdn-cgi/l/email-protection#0960676f66496f6e6827617c"><span class="__cf_em
