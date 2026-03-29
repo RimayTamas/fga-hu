@@ -232,7 +232,7 @@ footer { background:var(--nav); padding:28px 48px; display:flex; justify-content
 <body>
 
 <header class="top-bar">
-  <div class="logo">fga<sub>.hu</sub></div>
+  <a href="/" class="logo">fga<sub>.hu</sub></a>
   <div class="phone-block">
     <div class="tagline">Több mint 16 év tapasztalattal könyvelésben verhetetlen.</div>
     <div class="phone">+36 70 885-7806</div>
@@ -252,7 +252,7 @@ footer { background:var(--nav); padding:28px 48px; display:flex; justify-content
   <a href="fga-05-arak.html">Könyvelési árak 2026</a>
   <a href="fga-06-kapcsolat.html" class="active">Kapcsolat</a>
   <div class="nav-spacer"></div>
-  <a href="#" class="nav-webshop">Webshopod van? →</a>
+  <a href="https://webshopkonyveles.hu" class="nav-webshop">Webshopod van? →</a>
 </nav>
 
 <div class="page-hero">
@@ -304,35 +304,37 @@ footer { background:var(--nav); padding:28px 48px; display:flex; justify-content
   <div>
     <div class="form-box">
       <h2>Írjon nekünk</h2>
-      <p class="form-lead">Az 0 Ft-os áttekintés után 24 órán belül felvesszük Önnel a kapcsolatot.</p>
-      <div class="form-group">
-        <label>Neve</label>
-        <input type="text" placeholder="Pl. Kovács János">
-      </div>
-      <div class="form-group">
-        <label>Telefonszám</label>
-        <input type="tel" placeholder="+36 XX XXX XXXX">
-      </div>
-      <div class="form-group">
-        <label>E-mail</label>
-        <input type="email" placeholder="email@example.hu">
-      </div>
-      <div class="form-group">
-        <label>Miben segíthetünk?</label>
-        <select>
-          <option value="">Válasszon...</option>
-          <option>Induló vállalkozás</option>
-          <option>Könyvelőváltás</option>
-          <option>Általános áttekintés</option>
-          <option>Egyéb</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Üzenet (nem kötelező)</label>
-        <textarea placeholder="Bármit, amit fontosnak tart..."></textarea>
-      </div>
-      <button class="btn-red-full">Küldés »</button>
-      <p class="form-note">Az adatait bizalmasan kezeljük, és kizárólag az egyeztetés megszervezéséhez használjuk fel.</p>
+      <p class="form-lead">Kitöltés után az üzenete közvetlenül az info@fga.hu címre érkezik.</p>
+      <form action="https://formspree.io/f/xgvewpwb" method="POST">
+        <div class="form-group">
+          <label>Neve</label>
+          <input type="text" name="nev" placeholder="Pl. Kovács János" required>
+        </div>
+        <div class="form-group">
+          <label>Telefonszám</label>
+          <input type="tel" name="telefon" placeholder="+36 XX XXX XXXX">
+        </div>
+        <div class="form-group">
+          <label>E-mail</label>
+          <input type="email" name="email" placeholder="email@example.hu" required>
+        </div>
+        <div class="form-group">
+          <label>Miben segíthetünk?</label>
+          <select name="tema">
+            <option value="">Válasszon...</option>
+            <option>Induló vállalkozás</option>
+            <option>Könyvelőváltás</option>
+            <option>Általános áttekintés</option>
+            <option>Egyéb</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Üzenet (nem kötelező)</label>
+          <textarea name="uzenet" placeholder="Bármit, amit fontosnak tart..."></textarea>
+        </div>
+        <button type="submit" class="btn-red-full">Küldés »</button>
+        <p class="form-note">Az adatait bizalmasan kezeljük, és kizárólag az egyeztetés megszervezéséhez használjuk fel.</p>
+      </form>
     </div>
   </div>
 </div>
@@ -344,4 +346,9 @@ footer { background:var(--nav); padding:28px 48px; display:flex; justify-content
 
 <footer>
   <div class="logo" style="border-color:#444;">fga<sub style="font-size:9px;letter-spacing:2px;">.hu</sub></div>
-  <div class="footer-info">FGA Hungary Kft. &nbsp;|&nbsp; 1146 Budapest, Thököly út 159. &nbsp;|&nbsp; <a href="/cdn-cgi/l/email-protection#0960676f66496f6e6827617c"><span class="__cf_em
+  <div class="footer-info">FGA Hungary Kft. &nbsp;|&nbsp; info@fga.hu &nbsp;|&nbsp; +36 70 885-7806</div>
+  <div class="footer-copy">&copy; 2026 FGA Hungary Kft.</div>
+</footer>
+
+</body>
+</html>
